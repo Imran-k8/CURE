@@ -3,9 +3,9 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {
+    const {fullName, email, password, affiliation, adminCode} = req.body;
+    let role = 'User';
     try{
-        const {fullName, email, password, affiliation, adminCode} = req.body;
-
         if(!fullName || !email || !password || !affiliation){
             return res.status(400).json({message: "All fields are required"})
         }
@@ -21,15 +21,14 @@ export const signup = async (req, res) => {
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-
         if(adminCode === process.env.ADMIN_CODE){
-            const role = "admin"
+            role = "Admin";
         }
         const newUser = new User({
             fullName, 
             email,
-            password: hashedPassword,
             role,
+            password: hashedPassword,
             affiliation,
         })
         
