@@ -20,6 +20,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "User",
     },
+    affiliation:{
+        type: String,
+        required: true,
+    },
+    verified:{
+        type: String,
+        default: false,
+    }
   },
   { timestamps: true }
 );

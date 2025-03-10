@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
+import authRoutes from "./routes/auth.route.js";
+
 dotenv.config();
 
 const app = express();
@@ -24,6 +26,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.error(err));
 
+app.use("api/auth/", authRoutes);
 
 
 const PORT = process.env.PORT || 5001;
