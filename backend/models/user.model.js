@@ -24,9 +24,9 @@ const userSchema = new mongoose.Schema(
         required: true,
     },
     verified:{
-        type: String,
+        type: Boolean,
         default: false,
-    }
+    },
   },
   { timestamps: true }
 );
