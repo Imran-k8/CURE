@@ -121,3 +121,38 @@ export const verifyEmail = async (req, res) => {
         res.status(500).json({ message: "Server Error", error: error.message });
     }
 };
+
+
+export const checkAuth = (req, res) => {
+    try {
+      res.status(200).json(req.user);
+    } catch (error) {
+      console.log("Error in checkAuth controller", error.message);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
+
+export const checkVerified = (req, res) =>{
+    try {
+        if(req.user.verified == true){
+            return res.status(200).json({verified: true});
+        }
+    } catch (error) {
+        console.log("Error in checkVerified controller", error.message);
+        res.status("500").json({message: "internal server error"});
+    }
+}
+
+export const getRole = (req, res) =>{
+    try {
+        if(req.user.role == "admin"){
+            return res.status(200).json({role: "admin"});
+        }
+        if(req.user.role == "user"){
+            return res.status(200).json({role: "user"});
+        }
+    } catch (error) {
+        console.log("Error in getRole controller", error.message);
+        res.status("500").json({message: "internal server error"});
+    }
+}
