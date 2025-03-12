@@ -18,6 +18,7 @@ const App = () => {
     checkRole();
   }, [checkAuth, checkRole]);
 
+
   return (
     <>
      <Navbar />

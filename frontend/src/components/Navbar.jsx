@@ -1,12 +1,14 @@
-import React from 'react'
 import { useAuthStore } from '../store/useAuthStore'
-import { LogOut, Search, UserPlus, LogIn, FilePlus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { FaSearch, FaUserPlus, FaSignInAlt, FaUpload } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
+
+
 
 const Navbar = () => {
-    const {authUser, role, logout} = useAuthStore;
+    const {authUser, role, logout} = useAuthStore();
     const imageLink = "https://res.cloudinary.com/dlokrrvf0/image/upload/v1741728626/CURE_onsf0e.png"
+
   return (
     <>
     <nav className="bg-black bg-opacity-80 shadow-lg p-4 flex justify-between items-center">
@@ -31,20 +33,16 @@ const Navbar = () => {
         <Link to="/publish" className="group btn btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
           <FaUpload className="text-white transition-colors duration-300 group-hover:text-red-500" /> Publish with Us!
         </Link>
-
-        {authUser ? (<>
-          <Link to="/signup" className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
-          <FaUserPlus className="text-white transition-colors duration-300 group-hover:text-red-500" /> ass Up
+        {authUser?(<> <Link onClick={logout} className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
+          <FiLogOut className="text-white transition-colors duration-300 group-hover:text-red-500" /> Logout
         </Link>
-        <Link to="/login" className="group btn btn-outline btn-secondary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
-          <FaSignInAlt className="text-white transition-colors duration-300 group-hover:text-red-500" /> Login
-        </Link></>) :(<>
-          <Link to="/signup" className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
+        </>):(<><Link to="/signup" className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
           <FaUserPlus className="text-white transition-colors duration-300 group-hover:text-red-500" /> Sign Up
         </Link>
         <Link to="/login" className="group btn btn-outline btn-secondary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
           <FaSignInAlt className="text-white transition-colors duration-300 group-hover:text-red-500" /> Login
         </Link></>)}
+          
         
       </div>
     </nav>

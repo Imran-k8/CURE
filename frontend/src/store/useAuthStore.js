@@ -7,7 +7,7 @@ export const useAuthStore = create((set, get) => ({
     authUser: null,
     isSigningUp: false,
     isLoggingIn: false,
-    role: null,
+    role: "",
 
     logout: async () => {
         try {
@@ -32,10 +32,10 @@ export const useAuthStore = create((set, get) => ({
       checkRole: async () =>{
         try {
           const res = await axiosInstance.get("/auth/role");
-          set({admin:res.data});
+          set({role:res.data});
         } catch (error) {
           console.log("error in checkRole", error);
-          set({admin:null})
+          set({role:""})
         }
       },
 

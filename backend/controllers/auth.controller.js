@@ -145,10 +145,10 @@ export const checkVerified = (req, res) =>{
 
 export const getRole = (req, res) =>{
     try {
-        if(req.user.role == "admin"){
+        if(req.user.role === "Admin"){
             return res.status(200).json({role: "admin"});
         }
-        if(req.user.role == "user"){
+        if(req.user.role === "User"){
             return res.status(200).json({role: "user"});
         }
     } catch (error) {
