@@ -2,6 +2,7 @@ import React from 'react'
 
 import HomePage from "./pages/Homepage.jsx";
 import SignUpPage from './pages/SignUpPage.jsx';
+import LogInPage from './pages/LogInPage.jsx';
 import Navbar from "./components/Navbar.jsx" 
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
@@ -26,6 +27,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
+        <Route path="/login" element={!authUser ? <LogInPage /> : <Navigate to="/" />} />
       </Routes>
 
       <Toaster />

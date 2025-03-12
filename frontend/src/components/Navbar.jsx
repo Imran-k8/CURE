@@ -1,7 +1,6 @@
 import { useAuthStore } from '../store/useAuthStore'
 import { Link } from "react-router-dom";
-import { FaSearch, FaUserPlus, FaSignInAlt, FaUpload } from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
+import { FaSearch, FaUserPlus, FaSignInAlt, FaUpload, FaSignOutAlt } from "react-icons/fa";
 
 
 
@@ -15,7 +14,7 @@ const Navbar = () => {
       {/* Logo */}
       <div className="flex items-center gap-3">
         <img src={imageLink} alt="CURE Logo" className="h-15 w-15 rounded-full"/>
-        <span className="text-2xl font-bold text-white">CURE Network</span>
+        <Link to="/" className="text-2xl font-bold text-white">CURE Network</Link>
       </div>
       
       {/* Search Box */}
@@ -34,10 +33,10 @@ const Navbar = () => {
           <FaUpload className="text-white transition-colors duration-300 group-hover:text-red-500" /> Publish with Us!
         </Link>
         {authUser && role.role==="admin"  ? (<> <Link onClick={logout} className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
-          <FiLogOut className="text-white transition-colors duration-300 group-hover:text-red-500" /> Submissions
+          <FaSignOutAlt className="text-white transition-colors duration-300 group-hover:text-red-500" /> Submissions
         </Link></>):<></>}
         {authUser?(<> <Link onClick={logout} className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
-          <FiLogOut className="text-white transition-colors duration-300 group-hover:text-red-500" /> Logout
+          <FaSignOutAlt className="text-white transition-colors duration-300 group-hover:text-red-500" /> Logout
         </Link>
         </>):(<><Link to="/signup" className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
           <FaUserPlus className="text-white transition-colors duration-300 group-hover:text-red-500" /> Sign Up
