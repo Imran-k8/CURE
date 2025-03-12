@@ -9,12 +9,25 @@ const AboutUs = () => {
       <p className="text-lg text-gray-300 max-w-3xl text-center mb-6">
         CURE Network is dedicated to advancing undergraduate research by providing students with a
         professional platform to showcase their work. We support student-driven research across various disciplines,
-        offering mentorship, publication opportunities, and networking with industry professionals.
+        offering publication opportunities, and networking with industry professionals.
+      </p>
+      <p className="text-lg text-gray-300 max-w-3xl text-center mb-6">
+        Our mission is to bridge the gap between students and the broader academic community, allowing young researchers
+        to gain exposure, collaborate on groundbreaking ideas, and contribute to the ever-growing body of knowledge.
+        Through a structured peer-review process and expert guidance, we ensure that student research meets the highest
+        academic standards.
       </p>
       <p className="text-lg text-gray-300 max-w-3xl text-center mb-6">
         We are proud to be <span className="text-red-500 font-semibold">funded by the Ivey School of Business</span> and have
         <span className="text-red-500 font-semibold"> institutional backing from Western University</span>, ensuring
-        credibility, academic rigor, and growth opportunities for researchers in our community.
+        credibility, academic rigor, and growth opportunities for researchers in our community. This support allows us
+        to provide essential resources, including mentorship programs, research grants, and opportunities for students
+        to present their work at conferences and industry events.
+      </p>
+      <p className="text-lg text-gray-300 max-w-3xl text-center mb-6">
+        At CURE Network, we believe that research is not just about knowledge creation but also about making a tangible
+        impact. Our platform fosters innovation by encouraging interdisciplinary collaboration and empowering students
+        to explore solutions to real-world challenges.
       </p>
       
       <div className="flex justify-center items-center gap-12 mt-8">
