@@ -2,6 +2,7 @@ import React from 'react'
 
 import HomePage from "./pages/Homepage.jsx";
 import SignUpPage from './pages/SignUpPage.jsx';
+import Verify from './pages/Verify.jsx';
 import LogInPage from './pages/LogInPage.jsx';
 import Navbar from "./components/Navbar.jsx" 
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/" element={<HomePage/>} />
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
         <Route path="/login" element={!authUser ? <LogInPage /> : <Navigate to="/" />} />
+        <Route path="/verify/:token" element={<Verify/>} />
       </Routes>
 
       <Toaster />
