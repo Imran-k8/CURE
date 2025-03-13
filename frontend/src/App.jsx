@@ -5,6 +5,7 @@ import SignUpPage from './pages/SignUpPage.jsx';
 import Verify from './pages/Verify.jsx';
 import LogInPage from './pages/LogInPage.jsx';
 import Navbar from "./components/Navbar.jsx" 
+import Footer from './components/Foorter.jsx';
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
@@ -31,6 +32,8 @@ const App = () => {
         <Route path="/login" element={!authUser ? <LogInPage /> : <Navigate to="/" />} />
         <Route path="/verify/:token" element={<Verify/>} />
       </Routes>
+
+      <Footer />
 
       <Toaster />
     </>
