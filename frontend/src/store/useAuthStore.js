@@ -9,6 +9,7 @@ export const useAuthStore = create((set, get) => ({
     isSigningUp: false,
     isLoggingIn: false,
     role: "",
+    verified: false,
 
       checkAuth: async () => {
         try {
@@ -69,6 +70,17 @@ export const useAuthStore = create((set, get) => ({
       verifyEmail: async (token) =>{
         try {
           const res = await axiosInstance.get(`auth/verify-email/${token}`)
+          set({verified: true});
+          console.log(res.data);
+        } catch (error) {
+          console.log("error in verifying email:", error.message)
+        }
+      },
+
+      checkVerified: async (token) =>{
+        try {
+          const res = await axiosInstance.get(`auth/verified`)
+          set({verified: res.verified});
           console.log(res.data);
         } catch (error) {
           console.log("error in verifying email:", error.message)

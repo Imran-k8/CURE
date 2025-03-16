@@ -4,6 +4,7 @@ import HomePage from "./pages/Homepage.jsx";
 import SignUpPage from './pages/SignUpPage.jsx';
 import Verify from './pages/Verify.jsx';
 import LogInPage from './pages/LogInPage.jsx';
+import PublishWithUs from './pages/PublishWithUsPage.jsx';
 import Navbar from "./components/Navbar.jsx" 
 import Footer from './components/Foorter.jsx';
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
         <Route path="/login" element={!authUser ? <LogInPage /> : <Navigate to="/" />} />
         <Route path="/verify/:token" element={<Verify/>} />
+        <Route path="/publish" element={<PublishWithUs/>} />
       </Routes>
 
       <Footer />
