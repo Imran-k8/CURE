@@ -49,7 +49,7 @@ export const protectRouteAdmin = async (req, res, next) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    if(user.role !== "admin"){
+    if(user.role !== "Admin"){
         return res.status(404).json({message: "User not authorized"});
     }
 
