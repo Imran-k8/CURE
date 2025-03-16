@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore.js";
+import { Verified } from "lucide-react";
 
 const PublishWithUs = () => {
   const { authUser, verified, checkVerified, resendVerificationEmail } = useAuthStore();
@@ -11,6 +12,8 @@ const PublishWithUs = () => {
       checkVerified();
     }
   }, [authUser]); // Only re-run if authUser changes
+
+  console.log("verified:", verified);
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">

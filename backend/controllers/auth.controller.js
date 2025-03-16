@@ -156,3 +156,12 @@ export const getRole = (req, res) =>{
         res.status("500").json({message: "internal server error"});
     }
 }
+
+export const resendVerificationEmail = async (req, res) =>{
+    try {
+        await sendVerificationEmail(req.user.email, req.user.verificationToken);
+    } catch (error) {
+        console.log("error in resendVerificationEmail controller", error.message);
+        res.status("500").json({message: "internal server error"});
+    }
+}
