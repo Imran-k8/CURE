@@ -8,10 +8,10 @@ const Footer = () => {
       <div className="w-full max-w-6xl flex flex-col md:flex-row justify-between items-center text-center md:text-left">
         {/* Social Media Links */}
         <div className="flex items-center space-x-6">
-          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-red-500 transition text-2xl">
+          <a href="https://www.instagram.com/cure.journal/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-red-500 transition text-2xl">
             <FaInstagram />
           </a>
-          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-red-500 transition text-2xl">
+          <a href="https://www.linkedin.com/in/cure-network-941567353/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-red-500 transition text-2xl">
             <FaLinkedin />
           </a>
         </div>
