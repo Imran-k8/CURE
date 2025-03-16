@@ -32,7 +32,7 @@ const Navbar = () => {
         <Link to="/publish" className="group btn btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
           <FaUpload className="text-white transition-colors duration-300 group-hover:text-red-500" /> Publish with Us!
         </Link>
-        {authUser && role.role==="admin"  ? (<> <Link onClick={logout} className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
+        {authUser && role.role==="Admin"  ? (<> <Link onClick={logout} className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
           <FaSignOutAlt className="text-white transition-colors duration-300 group-hover:text-red-500" /> Submissions
         </Link></>):<></>}
         {authUser?(<> <Link onClick={logout} className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
