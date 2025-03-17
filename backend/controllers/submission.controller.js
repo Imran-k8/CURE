@@ -62,10 +62,10 @@ export const submit = async (req, res) => {
     }
 }
 
-export const list = async (req, res) =>{
+export const listPending = async (req, res) =>{
     try {
         // Fetch all submissions from the database
-        const submissions = await Submission.find();
+        const submissions = await Submission.find({status: "pending"});
 
         // Check if there are no submissions
         if (submissions.length === 0) {
