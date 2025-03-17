@@ -1,6 +1,7 @@
 import { useAuthStore } from '../store/useAuthStore'
 import { Link } from "react-router-dom";
 import { FaSearch, FaUserPlus, FaSignInAlt, FaUpload, FaSignOutAlt } from "react-icons/fa";
+import { MdOutlineAssignment } from "react-icons/md";
 
 
 
@@ -33,7 +34,7 @@ const Navbar = () => {
           <FaUpload className="text-white transition-colors duration-300 group-hover:text-red-500" /> Publish with Us!
         </Link>
         {authUser && role.role==="Admin"  ? (<> <Link to="/admin-dashboard" className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
-          <FaSignOutAlt className="text-white transition-colors duration-300 group-hover:text-red-500" /> Submissions
+          <MdOutlineAssignment className="text-white transition-colors duration-300 group-hover:text-red-500" /> Submissions
         </Link></>):<></>}
         {authUser?(<> <Link onClick={logout} className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
           <FaSignOutAlt className="text-white transition-colors duration-300 group-hover:text-red-500" /> Logout
