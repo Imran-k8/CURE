@@ -3,6 +3,10 @@ import Submission from "../models/submission.model.js";
 import uploadFileToS3 from "../lib/uploadSubmission.js"
 
 export const submit = async (req, res) => {
+
+    console.log("Received Body:", req.body);
+    console.log("Received File:", req.file);
+
     const {title, abstract, affiliation, submittedBy} = req.body;
     let { authors, keywords } = req.body;
     const file = req.file;
@@ -10,6 +14,9 @@ export const submit = async (req, res) => {
         if(!title || !abstract || !keywords || !authors || !affiliation || !file || !submittedBy){
             return res.status(400).json({message: "All fields are required"});
         }
+        if (!file || file.mimetype !== "application/pdf") {
+            return res.status(400).json({ message: "File must be a PDF" });
+          }
 
         if (typeof authors === "string") authors = JSON.parse(authors);
         if (typeof keywords === "string") keywords = JSON.parse(keywords);
@@ -43,7 +50,7 @@ export const submit = async (req, res) => {
                 authors: newSubmission.authors,
                 affiliation: newSubmission.affiliation,
                 file: newSubmission.file,
-                submittedBy: newSubmission.submittedby,
+                submittedBy: newSubmission.submittedBy,
                 status: newSubmission.status,
             });
 

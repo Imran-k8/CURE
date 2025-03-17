@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 
 export const useAuthStore = create((set, get) => ({
@@ -77,7 +78,7 @@ export const useAuthStore = create((set, get) => ({
         }
       },
 
-      checkVerified: async (token) =>{
+      checkVerified: async () =>{
         try {
           const res = await axiosInstance.get(`auth/verified`)
           set({verified: res.data});
@@ -92,6 +93,22 @@ export const useAuthStore = create((set, get) => ({
           await axiosInstance.post(`auth/send-verification-email`)
         } catch (error) {
           console.log("error in sending verification email:", error.message)
+        }
+      },
+      submit: async (data) =>{ 
+        try {
+          const res = await axiosInstance.post("/sub/submit", data, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+          if (res.status === 200 || res.status === 201) {
+            toast.success("Submission successful");
+          } else {
+            toast.error("Something went wrong. Please try again.");
+          }
+        } catch (error) {
+          console.log("error in submit", error.message);
         }
       },
 
