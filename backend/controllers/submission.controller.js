@@ -84,6 +84,7 @@ export const getSubmissionDetails = async (req, res) =>{
     const { id: id } = req.params;
     try {
         const submission = await Submission.find({_id: id});
+        const user = User.find({id}).select("-password")
         res.status(200).json(submission);
     } catch (error) {
         console.log("error in getSubmissionDetails controller", error);
