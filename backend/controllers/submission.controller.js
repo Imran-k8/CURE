@@ -79,3 +79,14 @@ export const listPending = async (req, res) =>{
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+export const getSubmissionDetails = async (req, res) =>{
+    const { id: id } = req.params;
+    try {
+        const submission = await Submission.find({_id: id});
+        res.status(200).json(submission);
+    } catch (error) {
+        console.log("error in getSubmissionDetails controller", error);
+        res.status(500).json({message: "internal server error"});
+    }
+}
