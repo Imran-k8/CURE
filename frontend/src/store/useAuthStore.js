@@ -11,6 +11,7 @@ export const useAuthStore = create((set, get) => ({
     isLoggingIn: false,
     role: "",
     verified: false,
+    pendingSubmissions: [],
 
       checkAuth: async () => {
         try {
@@ -109,6 +110,15 @@ export const useAuthStore = create((set, get) => ({
           }
         } catch (error) {
           console.log("error in submit", error.message);
+        }
+      },
+
+      getPendingSubmissions: async () =>{
+        try {
+          const res = await axiosInstance.get("/sub/submissionlist");
+          set({pendingSubmissions: res.data});
+        } catch (error) {
+          console.log("error in getPendingSubmissions", error.message);
         }
       },
 
