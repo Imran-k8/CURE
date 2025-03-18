@@ -14,81 +14,69 @@ const SubmissionForm = () => {
     
     const {authUser} = useAuthStore();
     const {submit} = useSubStore();
-  const [formData, setFormData] = useState({
-    title: "",
-    abstract: "",
-    authors: "",
-    affiliation: "",
-    keywords: "",
-    file: null,
-    submittedBY: authUser?._id,
-  });
+    const [formData, setFormData] = useState({
+      title: "",
+      abstract: "",
+      authors: "",
+      affiliation: "",
+      keywords: "",
+      file: null,
+      submittedBY: authUser?._id,
+    });
 
-  const handleFileChange = (e) => {
-    setFormData((prev) => ({ ...prev, file: e.target.files[0] }));
-  };
+    const handleFileChange = (e) => {
+      setFormData((prev) => ({ ...prev, file: e.target.files[0] }));
+    };
 
-  const validateForm = () => {
-    if (!formData.title.trim()) return toast.error("title is required");
-    if (!formData.abstract.trim()) return toast.error("abstract is required");
-    if (!formData.affiliation.trim()) return toast.error("affiliation is required");
+    const validateForm = () => {
+      if (!formData.title.trim()) return toast.error("title is required");
+      if (!formData.abstract.trim()) return toast.error("abstract is required");
+      if (!formData.affiliation.trim()) return toast.error("affiliation is required");
 
     // Ensure keywords is converted to an array before filtering
-  const keywordsArray = Array.isArray(formData.keywords)
-  ? formData.keywords
-  : formData.keywords.split(",").map(word => word.trim());
+    const keywordsArray = formData.keywords.split(",").map(k => k.trim());
+    const authorsArray = formData.authors.split(",").map(a => a.trim());
 
-const authorsArray = Array.isArray(formData.authors)
-  ? formData.authors
-  : formData.authors.split(",").map(word => word.trim());
+    // Validate array length
+    if (keywordsArray.filter(k => k !== "").length === 0) 
+      return toast.error("Keywords required");
 
-// Validate array length
-if (keywordsArray.filter(k => k !== "").length === 0) 
-  return toast.error("Keywords required");
+    if (authorsArray.filter(a => a !== "").length === 0) 
+      return toast.error("Authors required");
 
-if (authorsArray.filter(a => a !== "").length === 0) 
-  return toast.error("Authors required");
-
-// Update formData with converted values
-setFormData((prev) => ({
-  ...prev,
-  keywords: keywordsArray,
-  authors: authorsArray,
-}));
-
+    return { keywords: keywordsArray, authors: authorsArray }; // ✅ Return formatted arrays
     return true;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const success = validateForm();
+    const formattedValues = validateForm();
+    if (!formattedValues) return;
 
-    if (!success) return;
+    const formDataToSend = new FormData();
+    formDataToSend.append("title", formData.title);
+    formDataToSend.append("abstract", formData.abstract);
+    formDataToSend.append("affiliation", formData.affiliation);
+    formDataToSend.append("submittedBy", authUser?._id); // Ensure user ID is included
 
-  const formDataToSend = new FormData();
-  formDataToSend.append("title", formData.title);
-  formDataToSend.append("abstract", formData.abstract);
-  formDataToSend.append("affiliation", formData.affiliation);
-  formDataToSend.append("submittedBy", authUser?._id); // Ensure user ID is included
+    // ✅ Send each array value separately
+    formattedValues.keywords.forEach((keyword) => formDataToSend.append("keywords[]", keyword));
+    formattedValues.authors.forEach((author) => formDataToSend.append("authors[]", author));
 
-  // Convert arrays to JSON strings before appending
-  formDataToSend.append("keywords", JSON.stringify(formData.keywords));
-  formDataToSend.append("authors", JSON.stringify(formData.authors));
+    if (formData.file) {
+      formDataToSend.append("file", formData.file); // File must be appended as a binary object
+    } else {
+      console.error("❌ No file selected");
+    }
 
-  if (formData.file) {
-    formDataToSend.append("file", formData.file); // File must be appended as a binary object
-  } else {
-    console.error("❌ No file selected");
-  }
+    console.log("📤 Submitting FormData:");
+    for (let pair of formDataToSend.entries()) {
+      console.log(`${pair[0]}:`, pair[1]); // Logs each field
+    }
 
-  console.log("📤 Submitting FormData:");
-  for (let pair of formDataToSend.entries()) {
-    console.log(`${pair[0]}:`, pair[1]); // Logs each field
-  }
-
-  submit(formDataToSend);
-  navigate("/")
+    submit(formDataToSend);
+    navigate("/")
   };
 
   return (
