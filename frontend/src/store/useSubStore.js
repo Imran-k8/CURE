@@ -40,4 +40,28 @@ export const useSubStore = create((set, get) => ({
           console.log("error in getSubmissionDetails in authstore", error.message);
         }
       },
+      publish: async (id) =>{
+        try {
+          const res = await axiosInstance.put(`sub/publish/${id}`);
+          if (res.status === 200 || res.status === 201) {
+            toast.success("Published successful");
+          } else {
+            toast.error("Something went wrong. Please try again.");
+          }
+        } catch (error) {
+          console.log("error in reject in authstore", error.message);
+        }
+      },
+      reject: async (id) =>{
+        try {
+          const res = await axiosInstance.put(`sub/reject/${id}`);
+          if (res.status === 200 || res.status === 201) {
+            toast.success("Rejected successful");
+          } else {
+            toast.error("Something went wrong. Please try again.");
+          }
+        } catch (error) {
+          console.log("error in reject in authstore", error.message);
+        }
+      },
 }));

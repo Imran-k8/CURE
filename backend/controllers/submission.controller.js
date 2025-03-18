@@ -91,3 +91,32 @@ export const getSubmissionDetails = async (req, res) =>{
         res.status(500).json({message: "internal server error"});
     }
 }
+export const publish = async (req, res) =>{
+    const { id: id } = req.params;
+    try {
+        const submission = await Submission.findByIdAndUpdate(
+            id,
+            { status: "published" },
+            { new: true }
+          );
+        res.status(200).json(submission);
+    } catch (error) {
+        console.log("error in publish controller", error);
+        res.status(500).json({message: "internal server error"});
+    }
+}
+
+export const reject = async (req, res) =>{
+    const { id: id } = req.params;
+    try {
+        const submission = await Submission.findByIdAndUpdate(
+            id,
+            { status: "rejected" },
+            { new: true }
+          );
+        res.status(200).json(submission);
+    } catch (error) {
+        console.log("error in reject controller", error);
+        res.status(500).json({message: "internal server error"});
+    }
+}
