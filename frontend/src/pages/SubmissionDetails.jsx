@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore';
+import { useSubStore } from '../store/useSubStore';
 import { useNavigate } from "react-router-dom";
 
 const SubmissionDetails = () => {
     const {id} = useParams();
-    const {submissionDetails, getSubmissionDetails} = useAuthStore();
+    const {submissionDetails, getSubmissionDetails} = useSubStore();
     const navigate = useNavigate();
     useEffect(() => {
         getSubmissionDetails(id)

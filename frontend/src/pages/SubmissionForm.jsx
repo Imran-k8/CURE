@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FiFileText, FiUser, FiBriefcase, FiTag, FiUpload, FiBook } from "react-icons/fi";
 
 import { useAuthStore } from "../store/useAuthStore";
+import { useSubStore } from "../store/useSubStore";
 import { redirect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { User } from "lucide-react";
@@ -10,8 +11,9 @@ import { User } from "lucide-react";
 
 const SubmissionForm = () => {
     const navigate = useNavigate();
-    const {submit, authUser} = useAuthStore();
-
+    
+    const {authUser} = useAuthStore();
+    const {submit} = useSubStore();
   const [formData, setFormData] = useState({
     title: "",
     abstract: "",

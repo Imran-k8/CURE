@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import SubmissionItem from "../components/SubmissionItem";
 import { useAuthStore } from '../store/useAuthStore'
+import { useSubStore } from '../store/useSubStore'
 
 const AdminDashboard = () => {
-    const {pendingSubmissions, getPendingSubmissions} = useAuthStore();
+    const {pendingSubmissions, getPendingSubmissions} = useSubStore();
     const [currentPage, setCurrentPage] = useState(1);
       const itemsPerPage = 10;
       const navigate = useNavigate();

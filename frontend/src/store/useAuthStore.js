@@ -10,8 +10,7 @@ export const useAuthStore = create((set, get) => ({
     isLoggingIn: false,
     role: "",
     verified: false,
-    pendingSubmissions: [],
-    submissionDetails: null,
+    
 
       checkAuth: async () => {
         try {
@@ -97,38 +96,6 @@ export const useAuthStore = create((set, get) => ({
           console.log("error in sending verification email:", error.message)
         }
       },
-      submit: async (data) =>{ 
-        try {
-          const res = await axiosInstance.post("/sub/submit", data, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          });
-          if (res.status === 200 || res.status === 201) {
-            toast.success("Submission successful");
-          } else {
-            toast.error("Something went wrong. Please try again.");
-          }
-        } catch (error) {
-          console.log("error in submit", error.message);
-        }
-      },
-
-      getPendingSubmissions: async () =>{
-        try {
-          const res = await axiosInstance.get("/sub/submissionlist");
-          set({pendingSubmissions: res.data});
-        } catch (error) {
-          console.log("error in getPendingSubmissions", error.message);
-        }
-      },
-      getSubmissionDetails: async (id) =>{
-        try {
-          const res = await axiosInstance.get(`sub/submissiondetails/${id}`);
-          set({submissionDetails: res.data[0]});
-        } catch (error) {
-          console.log("error in getSubmissionDetails in authstore", error.message);
-        }
-      },
+      
 
 }));
