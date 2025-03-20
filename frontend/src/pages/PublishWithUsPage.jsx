@@ -49,6 +49,7 @@ const PublishWithUs = () => {
 
           <li>
               <strong>Publication Timeline & Expectations:</strong> <br/> 
+              - $10 Submission fee. <br />
               - Initial screening & review process typically takes 2 to 4 weeks.  <br/>
               - If accepted, the paper will be published on the CURE platform and indexed accordingly.  <br/>
               - Authors will be contacted via email in any case.  <br/>

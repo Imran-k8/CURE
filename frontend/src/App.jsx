@@ -9,6 +9,8 @@ import PublishWithUs from './pages/PublishWithUsPage.jsx';
 import SubmissionForm from "./pages/SubmissionForm.jsx";
 import AdminDashboard from './pages/AdminDashboard.jsx';
 import SubmissionDetails from './pages/SubmissionDetails.jsx';
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import TermsServices from "./pages/TermsServices.jsx";
 import Navbar from "./components/Navbar.jsx" ;
 import Footer from './components/Foorter.jsx';
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -19,7 +21,7 @@ import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  const { authUser, checkAuth, checkRole, role, checkVerified, verified} = useAuthStore();
+  const { isCheckingRole, isCheckingVerified, isCheckingAuth, authUser, checkAuth, checkRole, role, checkVerified, verified} = useAuthStore();
 
   useEffect(() => {
     checkAuth();
@@ -27,6 +29,12 @@ const App = () => {
     checkVerified();
   }, [checkAuth, checkRole, checkVerified]);
 
+  if ((isCheckingAuth && !authUser))
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="size-10 animate-spin" />
+      </div>
+    );
 
   return (
     <>
@@ -42,6 +50,8 @@ const App = () => {
         <Route path="/admin-dashboard" element={role.role==="Admin" ? <AdminDashboard /> : <Navigate to="/" />} />
         <Route path="/submission/:id" element={role.role==="Admin" ? <SubmissionDetails /> : <Navigate to="/" />} />
         <Route path="/search" element={<SearchResults/>} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
+        <Route path="/terms-services" element={<TermsServices/>} />
       </Routes>
 
       <Footer />

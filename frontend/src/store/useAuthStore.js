@@ -7,12 +7,16 @@ export const useAuthStore = create((set, get) => ({
 
     authUser: null,
     isSigningUp: false,
+    isCheckingAuth: false,
+    isCheckingRole: false,
+    isCheckingVerified: false,
     isLoggingIn: false,
     role: "",
     verified: false,
     
 
       checkAuth: async () => {
+        set({isCheckingAuth: true});
         try {
           const res = await axiosInstance.get("/auth/check");
     
@@ -20,16 +24,21 @@ export const useAuthStore = create((set, get) => ({
         } catch (error) {
           console.log("Error in checkAuth:", error);
           set({ authUser: null });
+        }finally{
+          set({isCheckingAuth: false});
         }
       },
 
       checkRole: async () =>{
+        set({isCheckingRole: true});
         try {
           const res = await axiosInstance.get("/auth/role");
           set({role:res.data});
         } catch (error) {
           console.log("error in checkRole", error);
           set({role:""})
+        }finally{
+          set({isCheckingRole: false});
         }
       },
 
@@ -80,12 +89,15 @@ export const useAuthStore = create((set, get) => ({
       },
 
       checkVerified: async () =>{
+        set({isCheckingVerified: true});
         try {
           const res = await axiosInstance.get(`auth/verified`)
           set({verified: res.data});
           console.log(res.data);
         } catch (error) {
           console.log("error in verifying email:", error.message)
+        }finally{
+          set({isCheckingVerified: false});
         }
       },
 
