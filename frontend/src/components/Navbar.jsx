@@ -1,13 +1,26 @@
 import { useAuthStore } from '../store/useAuthStore'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSearch, FaUserPlus, FaSignInAlt, FaUpload, FaSignOutAlt } from "react-icons/fa";
 import { MdOutlineAssignment } from "react-icons/md";
+import { useState } from 'react';
 
 
 
 const Navbar = () => {
     const {authUser, role, logout} = useAuthStore();
     const imageLink = "https://res.cloudinary.com/dlokrrvf0/image/upload/v1741728626/CURE_onsf0e.png"
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
+
+    const handleSearch = (e) => {
+      e.preventDefault();
+      // Only proceed if there's a non-empty search term
+      if (searchTerm.trim()) {
+        // Navigate to the search page with the query in the URL
+        navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
+      }
+    };
 
   return (
     <>
@@ -20,12 +33,18 @@ const Navbar = () => {
       
       {/* Search Box */}
       <div className="relative w-1/3">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="input input-bordered w-full text-black placeholder-gray-500 bg-white rounded-lg px-4 py-2"
-        />
-        <FaSearch className="absolute right-3 top-3 text-black" />
+        <form  onSubmit={handleSearch}>
+          <input
+            type="text"
+            value={searchTerm}
+            placeholder="Search..."
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="input input-bordered w-full text-black placeholder-gray-500 bg-white rounded-lg px-4 py-2"
+          />
+          <button type='submit'>
+            <FaSearch className="absolute right-3 top-3 text-black cursor-pointer" />
+          </button>
+        </form>
       </div>
       
       {/* Links */}

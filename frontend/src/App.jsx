@@ -4,6 +4,7 @@ import HomePage from "./pages/Homepage.jsx";
 import SignUpPage from './pages/SignUpPage.jsx';
 import Verify from './pages/Verify.jsx';
 import LogInPage from './pages/LogInPage.jsx';
+import SearchResults from './pages/SearchResults.jsx';
 import PublishWithUs from './pages/PublishWithUsPage.jsx';
 import SubmissionForm from "./pages/SubmissionForm.jsx";
 import AdminDashboard from './pages/AdminDashboard.jsx';
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/submit-paper" element={verified ? <SubmissionForm /> : <Navigate to="/publish" />} />
         <Route path="/admin-dashboard" element={role.role==="Admin" ? <AdminDashboard /> : <Navigate to="/" />} />
         <Route path="/submission/:id" element={role.role==="Admin" ? <SubmissionDetails /> : <Navigate to="/" />} />
+        <Route path="/search" element={<SearchResults/>} />
       </Routes>
 
       <Footer />
