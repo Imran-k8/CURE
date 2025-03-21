@@ -10,6 +10,7 @@ const SubmissionItem = ({ submission }) => {
         {submission.title}
       </h2>
       <p className="text-gray-400">Submitted by: {submission.submittedBy}</p>
+      <p className="text-gray-400">Email: {submission.email}</p>
       <p className="text-gray-400">Affiliation: {submission.affiliation}</p>
       <p className="text-gray-400">Submission Date: {new Date(submission.createdAt).toLocaleDateString()}</p>
       <p className="text-yellow-400 font-medium">Status: {submission.status}</p>

@@ -44,6 +44,7 @@ const SubmissionDetails = () => {
         <h2 className="text-2xl font-semibold text-gray-200 mb-4">{submissionDetails.title}</h2>
         <p className="text-gray-400 text-sm mb-4 border-l-4 border-red-500 pl-4">{submissionDetails.abstract}</p>
         <p className="text-gray-300 mb-2"><span className="font-semibold text-red-400">Submitted by:</span> {submissionDetails.submittedBy || "Unknown"}</p>
+        <p className="text-gray-300 mb-2"><span className="font-semibold text-red-400">Email:</span> {submissionDetails.email || "Unknown"}</p>
         <p className="text-gray-300 mb-2"><span className="font-semibold text-red-400">Affiliation:</span> {submissionDetails.affiliation || "N/A"}</p>
         <p className="text-gray-300 mb-2"><span className="font-semibold text-red-400">Status:</span> <span className="text-yellow-400 font-medium">{submissionDetails.status}</span></p>
         <p className="text-gray-300 mb-6"><span className="font-semibold text-red-400">Submission Date:</span> {submissionDetails.createdAt ? new Date(submissionDetails.createdAt).toLocaleDateString() : "Unknown"}</p>

@@ -31,6 +31,10 @@ const submissionSchema = new mongoose.Schema(
         ref: "User",
         required: true,
     },
+    email:{
+        type: String, 
+        required: true,
+    },
     status:{
         type: String,
         requred: true,

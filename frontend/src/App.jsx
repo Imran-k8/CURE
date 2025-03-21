@@ -9,13 +9,13 @@ import PublishWithUs from './pages/PublishWithUsPage.jsx';
 import SubmissionForm from "./pages/SubmissionForm.jsx";
 import AdminDashboard from './pages/AdminDashboard.jsx';
 import SubmissionDetails from './pages/SubmissionDetails.jsx';
-import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import TermsServices from "./pages/TermsServices.jsx";
 import Navbar from "./components/Navbar.jsx" ;
 import Footer from './components/Foorter.jsx';
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";

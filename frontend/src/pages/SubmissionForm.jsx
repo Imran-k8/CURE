@@ -22,6 +22,7 @@ const SubmissionForm = () => {
       keywords: "",
       file: null,
       submittedBY: authUser?._id,
+      email: authUser?.email,
     });
 
     const handleFileChange = (e) => {
@@ -59,6 +60,7 @@ const SubmissionForm = () => {
     formDataToSend.append("abstract", formData.abstract);
     formDataToSend.append("affiliation", formData.affiliation);
     formDataToSend.append("submittedBy", authUser?._id); // Ensure user ID is included
+    formDataToSend.append("email", authUser?.email); // Ensure user email is included
 
     // ✅ Send each array value separately
     formattedValues.keywords.forEach((keyword) => formDataToSend.append("keywords[]", keyword));

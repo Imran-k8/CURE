@@ -1,17 +1,18 @@
 import User from "../models/user.model.js";
 import Submission from "../models/submission.model.js";
 import uploadFileToS3 from "../lib/uploadSubmission.js"
+import { sendSubmissionConfirmation, sendPublishedEmail, sendRejectionEmail } from "../lib/emails.js";
 
 export const submit = async (req, res) => {
 
     console.log("Received Body:", req.body);
     console.log("Received File:", req.file);
 
-    const {title, abstract, affiliation, submittedBy} = req.body;
+    const {title, abstract, affiliation, submittedBy, email} = req.body;
     let { authors, keywords } = req.body;
     const file = req.file;
     try {
-        if(!title || !abstract || !keywords || !authors || !affiliation || !file || !submittedBy){
+        if(!title || !abstract || !keywords || !authors || !affiliation || !file || !submittedBy || !email){
             return res.status(400).json({message: "All fields are required"});
         }
         if (!file || file.mimetype !== "application/pdf") {
@@ -37,6 +38,7 @@ export const submit = async (req, res) => {
             affiliation,
             file: fileUrl,
             submittedBy,
+            email,
             status: "pending",
 
         })
@@ -51,8 +53,10 @@ export const submit = async (req, res) => {
                 affiliation: newSubmission.affiliation,
                 file: newSubmission.file,
                 submittedBy: newSubmission.submittedBy,
+                email: newSubmission.email,
                 status: newSubmission.status,
             });
+            sendSubmissionConfirmation(email)
 
         }
 
@@ -100,6 +104,7 @@ export const publish = async (req, res) =>{
             { new: true }
           );
         res.status(200).json(submission);
+        sendPublishedEmail(submission.email)
     } catch (error) {
         console.log("error in publish controller", error);
         res.status(500).json({message: "internal server error"});
@@ -115,6 +120,7 @@ export const reject = async (req, res) =>{
             { new: true }
           );
         res.status(200).json(submission);
+        sendRejectionEmail(submission.email);
     } catch (error) {
         console.log("error in reject controller", error);
         res.status(500).json({message: "internal server error"});
