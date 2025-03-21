@@ -9,7 +9,7 @@ import PublishWithUs from './pages/PublishWithUsPage.jsx';
 import SubmissionForm from "./pages/SubmissionForm.jsx";
 import AdminDashboard from './pages/AdminDashboard.jsx';
 import SubmissionDetails from './pages/SubmissionDetails.jsx';
-import TermsServices from "./pages/TermsServices.jsx";
+import TermsConditions from "./pages/TermsConditions.jsx";
 import Navbar from "./components/Navbar.jsx" ;
 import Footer from './components/Foorter.jsx';
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -51,7 +51,7 @@ const App = () => {
         <Route path="/submission/:id" element={role.role==="Admin" ? <SubmissionDetails /> : <Navigate to="/" />} />
         <Route path="/search" element={<SearchResults/>} />
         <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
-        <Route path="/terms-services" element={<TermsServices/>} />
+        <Route path="/terms-conditions" element={<TermsConditions/>} />
       </Routes>
 
       <Footer />

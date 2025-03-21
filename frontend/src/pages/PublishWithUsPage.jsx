@@ -61,7 +61,7 @@ const PublishWithUs = () => {
         <h2 className="text-xl font-semibold mb-2 text-[#3a0d2e]">Useful Links</h2>
         <ul className="list-disc pl-6 text-blue-600">
           <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
-          <li><a href="/terms-and-conditions" className="hover:underline">Terms & Conditions</a></li>
+          <li><a href="/terms-conditions" className="hover:underline">Terms & Conditions</a></li>
         </ul>
       </div>
 

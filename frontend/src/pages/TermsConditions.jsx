@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const TermsServices = () => {
+const TermsConditions = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -8,12 +8,12 @@ const TermsServices = () => {
     return (
         <div className="min-h-screen bg-[#0a192f] text-white flex justify-center py-12 px-6">
             <div className="max-w-4xl w-full bg-[#111827] p-12 rounded-xl shadow-xl border border-gray-800">
-                <h1 className="text-3xl font-bold text-white text-center mb-4">Terms & Services</h1>
+                <h1 className="text-3xl font-bold text-white text-center mb-4">Terms & Conditions</h1>
                 <p className="text-gray-400 text-center mb-10 text-sm">Effective Date: [Insert Date]</p>
 
                 <section className="mb-8">
                     <h2 className="text-xl font-semibold text-white mb-2">1. Introduction</h2>
-                    <p className="text-gray-300 leading-relaxed">Welcome to CURE Network. These Terms & Services govern your use of our platform. By accessing CURE Network, you agree to these terms.</p>
+                    <p className="text-gray-300 leading-relaxed">Welcome to CURE Network. These Terms & Conditions govern your use of our platform. By accessing CURE Network, you agree to these terms.</p>
                 </section>
 
                 <section className="mb-8">
@@ -76,4 +76,4 @@ const TermsServices = () => {
     );
 };
 
-export default TermsServices;
+export default TermsConditions;

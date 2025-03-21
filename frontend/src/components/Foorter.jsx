@@ -19,7 +19,7 @@ const Footer = () => {
         {/* Navigation Links */}
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 mt-4 md:mt-0">
           <Link to="/" className="text-gray-300 hover:text-red-500 transition">About Us</Link>
-          <Link to="/terms-services" className="text-gray-300 hover:text-red-500 transition">Terms & Services</Link>
+          <Link to="/terms-conditions" className="text-gray-300 hover:text-red-500 transition">Terms & Conditions</Link>
           <Link to="/privacy-policy" className="text-gray-300 hover:text-red-500 transition">Privacy Policy</Link>
           <Link to="/contact" className="text-gray-300 hover:text-red-500 transition">Contact</Link>
         </div>
