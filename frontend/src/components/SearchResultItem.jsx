@@ -1,5 +1,13 @@
+import { useState } from "react";
 const SearchResultItem = ({ paper }) => {
+    const [showModal, setShowModal] = useState(false);
+    const handleCiteClick = async (e) => {
+        e.stopPropagation();
+        setShowModal(true);
+    };
+
     return (
+        <>
         <li className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <h2 className="text-2xl font-semibold text-[#ff4081] mb-2">{paper.title}</h2>
@@ -12,12 +20,32 @@ const SearchResultItem = ({ paper }) => {
             <div className="flex flex-col items-end justify-between text-right">
                 <div className="flex flex-col space-y-2 mb-4">
                     <button className="cursor-pointer text-sm bg-[#ff4081] text-white px-4 py-2 rounded-md hover:bg-pink-600 transition">View Details</button>
-                    <button className="cursor-pointer text-sm bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition">Cite</button>
-                    <button className="cursor-pointer text-sm bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition">Download</button>
+                    <button onClick={handleCiteClick} className="cursor-pointer text-sm bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition">Cite</button>
+                    <button onClick={(e)=>{
+                        e.stopPropagation();
+                        window.open(paper.file, '_blank', 'noopener,noreferrer');
+                    }} className="cursor-pointer text-sm bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition">Download</button>
                 </div>
                 <p className="text-xs text-gray-500">Paper ID: {paper._id.slice(0, 8)}...</p>
             </div>
         </li>
+
+        {showModal && (
+            <div className="fixed inset-0 flex justify-center items-center z-50">
+                <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg max-w-lg w-full border border-gray-700">
+                    <h2 className="text-xl font-semibold mb-4 text-[#ff4081]">Citations</h2>
+                    <div className="space-y-2 text-sm">
+                        <p><strong>APA:</strong> Citation Currently Unavailable</p>
+                        <p><strong>MLA:</strong> Citation Currently Unavailable</p>
+                        <p><strong>Chicago:</strong> Citation Currently Unavailable</p>
+                    </div>
+                    <button onClick={() => setShowModal(false)} className="mt-4 bg-[#ff4081] text-white px-4 py-2 rounded-md hover:bg-pink-600 transition">
+                        Close
+                    </button>
+                </div>
+            </div>
+        )}      
+        </>
     );
 };
 
