@@ -31,7 +31,7 @@ const SearchResultItem = ({ paper }) => {
         </li>
 
         {showModal && (
-            <div className="fixed inset-0 flex justify-center items-center z-50">
+            <div onClick={(e)=>{e.stopPropagation()}} className="cursor-default fixed inset-0 flex justify-center items-center z-50">
                 <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg max-w-lg w-full border border-gray-700">
                     <h2 className="text-xl font-semibold mb-4 text-[#ff4081]">Citations</h2>
                     <div className="space-y-2 text-sm">
@@ -39,7 +39,10 @@ const SearchResultItem = ({ paper }) => {
                         <p><strong>MLA:</strong> Citation Currently Unavailable</p>
                         <p><strong>Chicago:</strong> Citation Currently Unavailable</p>
                     </div>
-                    <button onClick={() => setShowModal(false)} className="mt-4 bg-[#ff4081] text-white px-4 py-2 rounded-md hover:bg-pink-600 transition">
+                    <button onClick={(e) => {
+                        setShowModal(false);
+                        e.stopPropagation();
+                    }} className="mt-4 bg-[#ff4081] text-white px-4 py-2 rounded-md hover:bg-pink-600 transition cursor-pointer">
                         Close
                     </button>
                 </div>
