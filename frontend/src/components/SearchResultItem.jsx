@@ -1,10 +1,20 @@
 import { useState } from "react";
 const SearchResultItem = ({ paper }) => {
     const [showModal, setShowModal] = useState(false);
+    const getInitials = (name) => {
+            const words = name.trim().split(/\s+/);
+            const firstInitial = words[0]?.[0].toUpperCase() || "";
+            const lastInitial = words.length > 1 ? words[words.length - 1][0].toUpperCase() : "";
+            return lastInitial ? `${firstInitial}. ${lastInitial}.` : `${firstInitial}.`;
+        };
+    
     const handleCiteClick = async (e) => {
         e.stopPropagation();
         setShowModal(true);
+        console.log(paper.authors)
     };
+
+    
 
     return (
         <>
@@ -35,8 +45,15 @@ const SearchResultItem = ({ paper }) => {
                 <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg max-w-lg w-full border border-gray-700">
                     <h2 className="text-xl font-semibold mb-4 text-[#ff4081]">Citations</h2>
                     <div className="space-y-2 text-sm">
-                        <p><strong>APA:</strong> Citation Currently Unavailable</p>
-                        <p><strong>MLA:</strong> Citation Currently Unavailable</p>
+                        <p><strong>APA:</strong> {paper.authors.map((name, index) => (
+                            <span key={index}>
+                                {name}, {getInitials(name)}
+                                {index !== paper.authors.length - 1 && ", "}
+                            </span> ))} ({new Date(paper.updatedAt).getFullYear()}). {paper.title}. <i>CURE NETWORK</i>, cure.com/paper/{paper._id}</p>
+                        <p><strong>MLA:</strong> {paper.authors.map((name, index) => (
+                            <span key={index}>
+                                {name},&nbsp;
+                            </span> ))} "{paper.title}". CURE NETWORK, {new Date(paper.updatedAt).getFullYear()}.</p>
                         <p><strong>Chicago:</strong> Citation Currently Unavailable</p>
                     </div>
                     <button onClick={(e) => {
