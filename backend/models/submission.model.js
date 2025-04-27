@@ -42,7 +42,7 @@ const submissionSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-submissionSchema.index({ authors: 'text', keywords: 'text', abstract: 'text' });
+submissionSchema.index({ authors: 'text', keywords: 'text', abstract: 'text', title: 'text', affiliation: 'text' });
 const Submission = mongoose.model("Submission", submissionSchema);
 
 export default Submission;
