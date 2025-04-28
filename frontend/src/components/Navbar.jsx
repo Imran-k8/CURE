@@ -1,6 +1,6 @@
 import { useAuthStore } from '../store/useAuthStore'
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch, FaUserPlus, FaSignInAlt, FaUpload, FaSignOutAlt } from "react-icons/fa";
+import { FaSearch, FaUserPlus, FaSignInAlt, FaUpload, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { MdOutlineAssignment } from "react-icons/md";
 import { useState } from 'react';
 
@@ -55,7 +55,11 @@ const Navbar = () => {
         {authUser && role.role==="Admin"  ? (<> <Link to="/admin-dashboard" className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
           <MdOutlineAssignment className="text-white transition-colors duration-300 group-hover:text-red-500" /> Submissions
         </Link></>):<></>}
-        {authUser?(<> <Link onClick={logout} className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
+        {authUser?(<>
+          <Link to={`/profile/${authUser._id}`} className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
+          <FaUser className="text-white transition-colors duration-300 group-hover:text-red-500" /> Profile
+        </Link>
+         <Link onClick={logout} className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">
           <FaSignOutAlt className="text-white transition-colors duration-300 group-hover:text-red-500" /> Logout
         </Link>
         </>):(<><Link to="/signup" className="group btn btn-outline btn-primary flex items-center gap-2 text-white transition-colors duration-300 hover:text-red-500">

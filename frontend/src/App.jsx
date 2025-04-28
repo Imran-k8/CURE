@@ -9,6 +9,7 @@ import SubmissionForm from "./pages/SubmissionForm.jsx";
 import AdminDashboard from './pages/AdminDashboard.jsx';
 import SubmissionDetails from './pages/SubmissionDetails.jsx';
 import TermsConditions from "./pages/TermsConditions.jsx";
+import PaperDetails from "./pages/PaperDetails.jsx";
 import Navbar from "./components/Navbar.jsx" ;
 import Footer from './components/Foorter.jsx';
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -50,6 +51,7 @@ const App = () => {
         <Route path="/search" element={<SearchResults/>} />
         <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
         <Route path="/terms-conditions" element={<TermsConditions/>} />
+        <Route path="/paper/:id" element={<PaperDetails/>} />
       </Routes>
 
       <Footer />
