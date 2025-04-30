@@ -8,6 +8,7 @@ import PublishWithUs from './pages/PublishWithUsPage.jsx';
 import SubmissionForm from "./pages/SubmissionForm.jsx";
 import AdminDashboard from './pages/AdminDashboard.jsx';
 import SubmissionDetails from './pages/SubmissionDetails.jsx';
+import ContactPage from './pages/ContactPage.jsx';
 import TermsConditions from "./pages/TermsConditions.jsx";
 import PaperDetails from "./pages/PaperDetails.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/search" element={<SearchResults/>} />
         <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
         <Route path="/terms-conditions" element={<TermsConditions/>} />
+        <Route path="/contact" element={<ContactPage/>} />
         <Route path="/paper/:id" element={<PaperDetails/>} />
         <Route path="/profile/:id" element={authUser ? <ProfilePage/> : <HomePage/>} />
       </Routes>
