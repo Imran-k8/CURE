@@ -6,6 +6,7 @@ import axios from "axios";
 export const useSearchStore = create((set, get) => ({
     searchLoading: false,
     searchResults: [],
+    mySubmissions: [],
 
     getSearchResults: async (searchTerm) =>{
         set({searchLoading: true})
@@ -20,4 +21,16 @@ export const useSearchStore = create((set, get) => ({
           set({searchLoading: false})
         }
       },
+
+      getSearchResultsByUserId: async (id) =>{
+        try {
+          const res = await axiosInstance.get(`/search/getSearchResultsByUserId/${id}`);
+          console.log(res.data);
+          set({mySubmissions: res.data});
+          console.log(mySubmissions);
+        } catch (error) {
+          console.log("error in getSearchResultsByUserIdStore", error.message);
+        }
+      },
+
 }));

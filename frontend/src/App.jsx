@@ -10,6 +10,7 @@ import AdminDashboard from './pages/AdminDashboard.jsx';
 import SubmissionDetails from './pages/SubmissionDetails.jsx';
 import TermsConditions from "./pages/TermsConditions.jsx";
 import PaperDetails from "./pages/PaperDetails.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 import Navbar from "./components/Navbar.jsx" ;
 import Footer from './components/Foorter.jsx';
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
         <Route path="/terms-conditions" element={<TermsConditions/>} />
         <Route path="/paper/:id" element={<PaperDetails/>} />
+        <Route path="/profile/:id" element={authUser ? <ProfilePage/> : <HomePage/>} />
       </Routes>
 
       <Footer />

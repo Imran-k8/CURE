@@ -15,6 +15,7 @@ const SearchResults = () => {
         getSearchResults(searchTerm);
     }, [searchTerm, getSearchResults]);
 
+
     const indexOfLastResult = currentPage * resultsPerPage;
     const indexOfFirstResult = indexOfLastResult - resultsPerPage;
     const currentResults = searchResults.slice(indexOfFirstResult, indexOfLastResult);
@@ -31,7 +32,7 @@ const SearchResults = () => {
                 <h1 className="text-3xl font-semibold text-white text-center mb-6">Search Results for "{searchTerm}"</h1>
 
                 {currentResults.length === 0 ? (
-                    <p className="text-center text-gray-400">No results found.</p>
+                    <p className="text-center text-gray-400">ALL PAPERS ARE CURRENTLY UNDER REVIEW!</p> // Change this after to "No results found."
                 ) : (
                     <ul className="space-y-4">
                         {currentResults.map((paper, index) => (

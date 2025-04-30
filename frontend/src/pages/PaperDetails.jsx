@@ -7,6 +7,8 @@ const PaperDetails = () => {
   const { id } = useParams();
   const { submissionDetails, getSubmissionDetails } = useSubStore();
 
+  console.log(submissionDetails)
+
   useEffect(() => {
     if (id) {
       getSubmissionDetails(id);
