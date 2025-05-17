@@ -1,23 +1,21 @@
 import User from "../models/user.model.js";
 import Submission from "../models/submission.model.js";
-import uploadFileToS3 from "../lib/uploadSubmission.js"
 import { sendSubmissionConfirmation, sendPublishedEmail, sendRejectionEmail } from "../lib/emails.js";
+import uploadFileToS3 from "../lib/uploadSubmission.js"
+
 
 export const submit = async (req, res) => {
 
-    console.log("Received Body:", req.body);
-    console.log("Received File:", req.file);
-
-    const {title, abstract, affiliation, submittedBy, email} = req.body;
+    const {title, abstract, affiliation, submittedBy, email, file} = req.body;
     let { authors, keywords } = req.body;
-    const file = req.file;
     try {
         if(!title || !abstract || !keywords || !authors || !affiliation || !file || !submittedBy || !email){
             return res.status(400).json({message: "All fields are required"});
         }
-        if (!file || file.mimetype !== "application/pdf") {
-            return res.status(400).json({ message: "File must be a PDF" });
-          }
+        if (!file || typeof file !== "string" || !file.endsWith(".pdf")) {
+            return res.status(400).json({ message: "File must be a valid PDF" });
+        }
+        
 
         if (typeof authors === "string") authors = JSON.parse(authors);
         if (typeof keywords === "string") keywords = JSON.parse(keywords);
@@ -26,7 +24,7 @@ export const submit = async (req, res) => {
             return res.status(400).json({message: "All fields are required"});
         }
 
-        const fileUrl = await uploadFileToS3(file);
+       
 
 
 
@@ -36,7 +34,7 @@ export const submit = async (req, res) => {
             keywords,
             authors,
             affiliation,
-            file: fileUrl,
+            file: file,
             submittedBy,
             email,
             status: "pending",
@@ -62,6 +60,19 @@ export const submit = async (req, res) => {
 
     } catch (error) {
         console.log("Error in submit controller", error.message);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
+export const uploadfile = async (req, res ) =>{
+    try {
+        const file = req.file;
+        const fileUrl = await uploadFileToS3(file);
+        if(fileUrl){
+            return res.status(200).json({fileUrl: fileUrl})
+        }
+    } catch (error) {
+        console.log("Error in uploadfile controller", error.message);
         res.status(500).json({ message: "Internal Server Error" });
     }
 }

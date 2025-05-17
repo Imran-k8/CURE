@@ -9,11 +9,13 @@ import { User } from "lucide-react";
 
 
 
+
+
 const SubmissionForm = () => {
     const navigate = useNavigate();
     
     const {authUser} = useAuthStore();
-    const {submit} = useSubStore();
+    const {createCheckoutSession, uploadFile, fileUrl} = useSubStore();
     const [formData, setFormData] = useState({
       title: "",
       abstract: "",
@@ -49,7 +51,7 @@ const SubmissionForm = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formattedValues = validateForm();
@@ -77,7 +79,26 @@ const SubmissionForm = () => {
       console.log(`${pair[0]}:`, pair[1]); // Logs each field
     }
 
-    submit(formDataToSend);
+    const data = {
+      file: formData.file
+    }
+
+    const uploadResponse = await uploadFile(data);
+
+    console.log(fileUrl)
+
+    const plainSubmission = {
+      title: formData.title,
+      abstract: formData.abstract,
+      affiliation: formData.affiliation,
+      submittedBy: authUser?._id,
+      email: authUser?.email,
+      keywords: formattedValues.keywords,
+      authors: formattedValues.authors,
+      file: uploadResponse.fileUrl, 
+    };
+    await createCheckoutSession(1000, authUser?.email, plainSubmission);
+
     navigate("/")
   };
 

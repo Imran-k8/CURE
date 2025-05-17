@@ -20,6 +20,8 @@ import { useEffect } from "react";
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
+import PaymentSuccess from './pages/PaymentSuccess.jsx';
+
 
 const App = () => {
   const { isCheckingRole, isCheckingVerified, isCheckingAuth, authUser, checkAuth, checkRole, role, checkVerified, verified} = useAuthStore();
@@ -56,6 +58,7 @@ const App = () => {
         <Route path="/contact" element={<ContactPage/>} />
         <Route path="/paper/:id" element={<PaperDetails/>} />
         <Route path="/profile/:id" element={authUser ? <ProfilePage/> : <HomePage/>} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
       </Routes>
 
       <Footer />

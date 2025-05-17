@@ -8,7 +8,12 @@ import authRoutes from "./routes/auth.route.js"
 import submissionRoutes from "./routes/submission.route.js"
 import searchRoutes from "./routes/search.route.js"
 
+import paymentRoutes from './routes/paymentRoutes.js';
+
+
 dotenv.config();
+
+
 
 const app = express();
 app.use(express.json());
@@ -28,6 +33,8 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use("/api/auth/", authRoutes);
 app.use("/api/sub/", submissionRoutes);
 app.use("/api/search/", searchRoutes);
+app.use('/api/payment/', paymentRoutes);
+
 
 
 const PORT = process.env.PORT || 5001;
