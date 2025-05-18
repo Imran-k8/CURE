@@ -82,7 +82,6 @@ export const useAuthStore = create((set, get) => ({
         try {
           const res = await axiosInstance.get(`auth/verify-email/${token}`)
           set({verified: true});
-          console.log(res.data);
         } catch (error) {
           console.log("error in verifying email:", error.message)
         }
@@ -93,7 +92,6 @@ export const useAuthStore = create((set, get) => ({
         try {
           const res = await axiosInstance.get(`auth/verified`)
           set({verified: res.data});
-          console.log(res.data);
         } catch (error) {
           console.log("error in verifying email:", error.message)
         }finally{

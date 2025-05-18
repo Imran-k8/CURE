@@ -12,7 +12,6 @@ const SearchResultItem = ({ paper }) => {
     const handleCiteClick = async (e) => {
         e.stopPropagation();
         setShowModal(true);
-        console.log(paper.authors)
     };
 
     
@@ -33,7 +32,6 @@ const SearchResultItem = ({ paper }) => {
                     <button className="cursor-pointer text-sm bg-[#ff4081] text-white px-4 py-2 rounded-md hover:bg-pink-600 transition">View Details</button>
                     <button onClick={handleCiteClick} className="cursor-pointer text-sm bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition">Cite</button>
                     <button onClick={(e)=>{
-                        console.log(paper.file);
                         e.stopPropagation();
                         window.open(paper.file, '_blank', 'noopener,noreferrer');
                     }} className="cursor-pointer text-sm bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition">Download</button>

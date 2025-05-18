@@ -13,8 +13,6 @@ const PublishWithUs = () => {
     }
   }, [authUser]); // Only re-run if authUser changes
 
-  console.log("verified:", verified);
-
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Title */}

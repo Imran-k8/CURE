@@ -12,8 +12,6 @@ const AdminDashboard = () => {
       useEffect(() => {
         getPendingSubmissions();
       }, [getPendingSubmissions]);
-
-      console.log(pendingSubmissions)
     
       // Calculate pagination
       const totalPages = Math.ceil(pendingSubmissions.length / itemsPerPage);

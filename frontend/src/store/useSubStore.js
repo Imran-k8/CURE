@@ -30,7 +30,6 @@ export const useSubStore = create((set, get) => ({
             },
           });
           if (res.status === 200 || res.status === 201) {
-            console.log("file uploaded successfully")
             set({fileUrl: res.data});
             return res.data
           } else {
@@ -93,10 +92,7 @@ export const useSubStore = create((set, get) => ({
       
           if (res.data?.url) {
             // Store the submission temporarily in localStorage/sessionStorage
-            console.log("tststs")
-            console.log("Saving submission data to localStorage:", submissionData);
             localStorage.setItem('pendingSubmission', JSON.stringify(submissionData));
-            console.log("Retrieved after return:", localStorage.getItem('pendingSubmission'));
             window.location.href = res.data.url;
           } else {
             toast.error("Failed to initiate payment.");

@@ -15,7 +15,6 @@ const SubmissionDetails = () => {
         getSubmissionDetails(id)
       }, [getSubmissionDetails]);
 
-    console.log(submissionDetails)
 
     if (!submissionDetails) {
         return <p className="text-red-500 text-center mt-10">No submission details available.</p>;

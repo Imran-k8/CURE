@@ -12,9 +12,7 @@ export const useSearchStore = create((set, get) => ({
         set({searchLoading: true})
         try {
           const res = await axiosInstance.get(`/search/getSearchResults?query=${encodeURIComponent(searchTerm)}`);
-          console.log(res.data);
           set({searchResults: res.data});
-          console.log(searchResults);
         } catch (error) {
           console.log("error in getSearchResults", error.message);
         }finally{
@@ -25,9 +23,7 @@ export const useSearchStore = create((set, get) => ({
       getSearchResultsByUserId: async (id) =>{
         try {
           const res = await axiosInstance.get(`/search/getSearchResultsByUserId/${id}`);
-          console.log(res.data);
           set({mySubmissions: res.data});
-          console.log(mySubmissions);
         } catch (error) {
           console.log("error in getSearchResultsByUserIdStore", error.message);
         }

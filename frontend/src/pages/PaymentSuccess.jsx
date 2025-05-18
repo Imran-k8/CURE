@@ -18,7 +18,6 @@ const processPayment = async () => {
         initialized.current = true;
         const submissionData = JSON.parse(localStorage.getItem('pendingSubmission'));
         if (submissionData && !verified) {
-            console.log("I ran")
             await submit({
                 title: submissionData.title,
                 abstract: submissionData.abstract,

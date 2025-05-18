@@ -74,10 +74,7 @@ const SubmissionForm = () => {
       console.error("❌ No file selected");
     }
 
-    console.log("📤 Submitting FormData:");
-    for (let pair of formDataToSend.entries()) {
-      console.log(`${pair[0]}:`, pair[1]); // Logs each field
-    }
+
 
     const data = {
       file: formData.file
@@ -85,7 +82,6 @@ const SubmissionForm = () => {
 
     const uploadResponse = await uploadFile(data);
 
-    console.log(fileUrl)
 
     const plainSubmission = {
       title: formData.title,
