@@ -11,7 +11,7 @@ export const useSubStore = create((set, get) => ({
 
     submit: async (data) => {
       try {
-        const res = await axiosInstance.post("/sub/submit", data); // JSON by default
+        const res = await axiosInstance.post("/sub/submit", data);
         if (res.status === 200 || res.status === 201) {
           toast.success("Submission successful");
         } else {
@@ -37,7 +37,7 @@ export const useSubStore = create((set, get) => ({
             console.log("Something went wrong. Please try again.");
           }
         } catch (error) {
-          console.log("error in submit", error.message);
+          console.log("error in file upload", error.message);
         }
       },
 

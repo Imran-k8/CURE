@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSubStore } from '../store/useSubStore';
 import { useAuthStore } from '../store/useAuthStore';
@@ -9,15 +9,16 @@ const PaymentSuccess = () => {
   const [verified, setVerified] = useState(null);
   const location = useLocation();
   const sessionId = new URLSearchParams(location.search).get('session_id');
-
-  useEffect(() => {
-    const processPayment = async () => {
+  const initialized = useRef(false)
+const processPayment = async () => {
       if (!sessionId) return;
 
       const isPaid = await verifyCheckoutSession(sessionId);
-      if (isPaid) {
+      if (isPaid && !initialized.current) {
+        initialized.current = true;
         const submissionData = JSON.parse(localStorage.getItem('pendingSubmission'));
         if (submissionData && !verified) {
+            console.log("I ran")
             await submit({
                 title: submissionData.title,
                 abstract: submissionData.abstract,
@@ -36,9 +37,9 @@ const PaymentSuccess = () => {
         setVerified(false);
       }
     };
-
+  useEffect(() => {
     processPayment();
-  });
+  }, []);
 
   if (verified === null) return <p>Verifying payment...</p>;
   if (verified === true) return <p>✅ Payment verified! Your submission has been received.</p>;
