@@ -10,8 +10,16 @@ import searchRoutes from "./routes/search.route.js"
 
 import paymentRoutes from './routes/paymentRoutes.js';
 
+import path from "path";
+
+
+
 
 dotenv.config();
+
+const __dirname = path.resolve();
+
+
 
 
 
@@ -36,6 +44,15 @@ app.use("/api/search/", searchRoutes);
 app.use('/api/payment/', paymentRoutes);
 
 
+if(process.env.NODE_ENV === "production"){
+  app.use(express.static(path.join(__dirname, "..frontend/dist")));
+  app.get("*", (req, res)=>{
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  })
+}
+
+
 
 const PORT = process.env.PORT || 5001;
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
