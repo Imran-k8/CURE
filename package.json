@@ -1,0 +1,21 @@
+{
+  "name": "cure",
+  "version": "1.0.0",
+  "description": "Canadian Undergraduate Research Exchange",
+  "main": "index.js",
+  "scripts": {
+    "build": "",
+    "start": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Imran-k8/CURE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Imran-k8/CURE/issues"
+  },
+  "homepage": "https://github.com/Imran-k8/CURE#readme"
+}
