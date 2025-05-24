@@ -190,7 +190,7 @@ const SubmissionForm = () => {
             type="submit" 
             className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-3 rounded-lg transition duration-300 shadow-md hover:text-black cursor-pointer"
           >
-            Submit Paper
+            Complete Submission - $10
           </button>
         </form>
       </div>
