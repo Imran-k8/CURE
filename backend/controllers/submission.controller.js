@@ -111,7 +111,7 @@ export const publish = async (req, res) =>{
     try {
         const submission = await Submission.findByIdAndUpdate(
             id,
-            { status: "published" },
+            { status: "Pending Payment" },
             { new: true }
           );
         res.status(200).json(submission);

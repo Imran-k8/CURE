@@ -15,14 +15,14 @@ const SubmissionForm = () => {
     const navigate = useNavigate();
     
     const {authUser} = useAuthStore();
-    const {createCheckoutSession, uploadFile, fileUrl} = useSubStore();
+    const {createCheckoutSession, uploadFile, fileUrl, submit} = useSubStore();
     const [formData, setFormData] = useState({
       title: "",
       abstract: "",
       authors: "",
       affiliation: "",
       keywords: "",
-      file: null,
+      file: "",
       submittedBY: authUser?._id,
       email: authUser?.email,
     });
@@ -82,18 +82,10 @@ const SubmissionForm = () => {
 
     const uploadResponse = await uploadFile(data);
 
+    formDataToSend.append("file", uploadResponse.fileUrl);
 
-    const plainSubmission = {
-      title: formData.title,
-      abstract: formData.abstract,
-      affiliation: formData.affiliation,
-      submittedBy: authUser?._id,
-      email: authUser?.email,
-      keywords: formattedValues.keywords,
-      authors: formattedValues.authors,
-      file: uploadResponse.fileUrl, 
-    };
-    await createCheckoutSession(1000, authUser?.email, plainSubmission);
+
+    submit(formDataToSend);
 
     navigate("/")
   };
@@ -190,7 +182,7 @@ const SubmissionForm = () => {
             type="submit" 
             className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-3 rounded-lg transition duration-300 shadow-md hover:text-black cursor-pointer"
           >
-            Complete Submission - $10
+            Complete Submission
           </button>
         </form>
       </div>
