@@ -7,20 +7,20 @@ import { FileOutput } from "lucide-react";
 export const useSubStore = create((set, get) => ({
     pendingSubmissions: [],
     submissionDetails: null,
-    fileUrl: null,
+    
+    submit: async (data) =>{ 
+        try {
+          const res = await axiosInstance.post("/sub/submit", data);
 
-    submit: async (data) => {
-      try {
-        const res = await axiosInstance.post("/sub/submit", data);
-        if (res.status === 200 || res.status === 201) {
-          toast.success("Submission successful");
-        } else {
-          toast.error("Something went wrong. Please try again.");
+          if (res.status === 200 || res.status === 201) {
+            toast.success("Submission successful");
+          } else {
+            toast.error("Something went wrong. Please try again.");
+          }
+        } catch (error) {
+          console.log("error in submit", error.message);
         }
-      } catch (error) {
-        console.log("error in submit", error.message);
-      }
-    },
+      },
     
     uploadFile: async (data) =>{ 
         try {
@@ -68,6 +68,18 @@ export const useSubStore = create((set, get) => ({
           console.log("error in reject in authstore", error.message);
         }
       },
+      finalApproval: async (id) =>{
+        try {
+          const res = await axiosInstance.put(`sub/approve/${id}`);
+          if (res.status === 200 || res.status === 201) {
+            toast.success("Published successful");
+          } else {
+            toast.error("Something went wrong. Please try again.");
+          }
+        } catch (error) {
+          console.log("error in reject in authstore", error.message);
+        }
+      },
       reject: async (id) =>{
         try {
           const res = await axiosInstance.put(`sub/reject/${id}`);
@@ -80,19 +92,16 @@ export const useSubStore = create((set, get) => ({
           console.log("error in reject in authstore", error.message);
         }
       },
-      createCheckoutSession: async (amount, email, submissionData) => {
+      createCheckoutSession: async (amount, email, submissionid) => {
         try {
           const res = await axiosInstance.post('/payment/create-checkout-session', {
             amount,
             email,
-            metadata: {
-              submission: JSON.stringify(submissionData), // optional: include submission data
-            },
           });
       
           if (res.data?.url) {
             // Store the submission temporarily in localStorage/sessionStorage
-            localStorage.setItem('pendingSubmission', JSON.stringify(submissionData));
+            localStorage.setItem('pendingSubmission', JSON.stringify(submissionid));
             window.location.href = res.data.url;
           } else {
             toast.error("Failed to initiate payment.");

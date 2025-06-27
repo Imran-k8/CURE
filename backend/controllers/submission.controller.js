@@ -6,16 +6,19 @@ import uploadFileToS3 from "../lib/uploadSubmission.js"
 
 export const submit = async (req, res) => {
 
-    const {title, abstract, affiliation, submittedBy, email, file} = req.body;
+    console.log("Received Body:", req.body);
+    console.log("Received File:", req.file);
+
+    const {title, abstract, affiliation, submittedBy, email} = req.body;
     let { authors, keywords } = req.body;
+    const file = req.file;
     try {
         if(!title || !abstract || !keywords || !authors || !affiliation || !file || !submittedBy || !email){
             return res.status(400).json({message: "All fields are required"});
         }
-        if (!file || typeof file !== "string" || !file.endsWith(".pdf")) {
-            return res.status(400).json({ message: "File must be a valid PDF" });
-        }
-        
+        if (!file || file.mimetype !== "application/pdf") {
+            return res.status(400).json({ message: "File must be a PDF" });
+          }
 
         if (typeof authors === "string") authors = JSON.parse(authors);
         if (typeof keywords === "string") keywords = JSON.parse(keywords);
@@ -24,7 +27,7 @@ export const submit = async (req, res) => {
             return res.status(400).json({message: "All fields are required"});
         }
 
-       
+        const fileUrl = await uploadFileToS3(file);
 
 
 
@@ -34,7 +37,7 @@ export const submit = async (req, res) => {
             keywords,
             authors,
             affiliation,
-            file: file,
+            file: fileUrl,
             submittedBy,
             email,
             status: "pending",
@@ -111,11 +114,25 @@ export const publish = async (req, res) =>{
     try {
         const submission = await Submission.findByIdAndUpdate(
             id,
-            { status: "Pending Payment" },
+            { status: "pending payment" },
             { new: true }
           );
         res.status(200).json(submission);
         sendPublishedEmail(submission.email)
+    } catch (error) {
+        console.log("error in publish controller", error);
+        res.status(500).json({message: "internal server error"});
+    }
+}
+export const approve = async (req, res) =>{
+    const { id: id } = req.params;
+    try {
+        const submission = await Submission.findByIdAndUpdate(
+            id,
+            { status: "published" },
+            { new: true }
+          );
+        res.status(200).json(submission);
     } catch (error) {
         console.log("error in publish controller", error);
         res.status(500).json({message: "internal server error"});

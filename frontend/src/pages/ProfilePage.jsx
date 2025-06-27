@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 import { useSearchStore } from '../store/useSearchStore';
-import { User, BadgeCheck, Mail, ShieldCheck, FileText } from 'lucide-react';
+import { User, BadgeCheck, FileText } from 'lucide-react';
+import ProfileItem from '../components/ProfileItem';
 
 const ProfilePage = () => {
   const { id } = useParams();
@@ -13,6 +14,11 @@ const ProfilePage = () => {
     checkAuth();
     if (id) getSearchResultsByUserId(id);
   }, [checkAuth, id, getSearchResultsByUserId]);
+
+  const handleCompletePayment = (submissionId) => {
+    // TODO: implement redirection or modal for completing payment
+    console.log('Complete payment for submission:', submissionId);
+  };
 
   return (
     <div className="min-h-screen w-full bg-[#0b1120] text-gray-100">
@@ -51,14 +57,10 @@ const ProfilePage = () => {
           ) : (
             <ul className="space-y-4">
               {mySubmissions.map((submission) => (
-                <li
+                <ProfileItem
                   key={submission._id}
-                  className="border border-gray-600 rounded-md p-4 bg-[#0f172a] hover:border-pink-500 transition"
-                >
-                  <p className="text-lg font-semibold text-white">{submission.title}</p>
-                  <p className="text-sm text-gray-300">Status: <span className="text-pink-400 font-medium">{submission.status}</span></p>
-                  <p className="text-sm text-gray-400">Submitted: {new Date(submission.updatedAt).toLocaleDateString()}</p>
-                </li>
+                  submission={submission}
+                />
               ))}
             </ul>
           )}

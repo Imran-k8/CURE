@@ -15,14 +15,14 @@ const SubmissionForm = () => {
     const navigate = useNavigate();
     
     const {authUser} = useAuthStore();
-    const {createCheckoutSession, uploadFile, fileUrl, submit} = useSubStore();
+    const {submit} = useSubStore();
     const [formData, setFormData] = useState({
       title: "",
       abstract: "",
       authors: "",
       affiliation: "",
       keywords: "",
-      file: "",
+      file: null,
       submittedBY: authUser?._id,
       email: authUser?.email,
     });
@@ -51,7 +51,7 @@ const SubmissionForm = () => {
     return true;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formattedValues = validateForm();
@@ -74,16 +74,10 @@ const SubmissionForm = () => {
       console.error("❌ No file selected");
     }
 
-
-
-    const data = {
-      file: formData.file
+    console.log("📤 Submitting FormData:");
+    for (let pair of formDataToSend.entries()) {
+      console.log(`${pair[0]}:`, pair[1]); // Logs each field
     }
-
-    const uploadResponse = await uploadFile(data);
-
-    formDataToSend.append("file", uploadResponse.fileUrl);
-
 
     submit(formDataToSend);
 

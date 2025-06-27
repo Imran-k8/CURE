@@ -4,7 +4,7 @@ import { useSubStore } from '../store/useSubStore';
 import { useAuthStore } from '../store/useAuthStore';
 
 const PaymentSuccess = () => {
-  const { verifyCheckoutSession, submit } = useSubStore();
+  const { verifyCheckoutSession, finalApproval } = useSubStore();
   const { authUser } = useAuthStore();
   const [verified, setVerified] = useState(null);
   const location = useLocation();
@@ -16,20 +16,11 @@ const processPayment = async () => {
       const isPaid = await verifyCheckoutSession(sessionId);
       if (isPaid && !initialized.current) {
         initialized.current = true;
-        const submissionData = JSON.parse(localStorage.getItem('pendingSubmission'));
-        if (submissionData && !verified) {
-            await submit({
-                title: submissionData.title,
-                abstract: submissionData.abstract,
-                affiliation: submissionData.affiliation,
-                submittedBy: submissionData.submittedBy,
-                email: submissionData.email,
-                keywords: submissionData.keywords,
-                authors: submissionData.authors,
-                file: submissionData.file, 
-              });
+        const submissionid = JSON.parse(localStorage.getItem('pendingSubmission'));
+        if (submissionid && !verified) {
+            await finalApproval(submissionid);
               
-              localStorage.removeItem('pendingSubmission');
+            localStorage.removeItem('pendingSubmission');
         }
         setVerified(true);
       } else {
